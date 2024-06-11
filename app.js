@@ -4,18 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var playerRouter = require('./routes/player.js');
 require("dotenv").config();
+const cors = require("cors");
 
 var app = express();
-const cors = require("cors");
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use((req,res,next)=>{
-  res.header({"Access-Control-Allow-Origin":"*"})
-  next()
-})
+
 const mongoose = require("mongoose");
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -24,7 +21,10 @@ mongoose
   })
   .then(() => console.log("connexion mongo db ok !"))
   .catch(() => console.log("connexion mongo db failed ! "));
-
+app.use((req,res,next)=>{
+    res.header({"Access-Control-Allow-Origin":"*"})
+    next()
+  })
 app.use('/player', playerRouter);
 
 
