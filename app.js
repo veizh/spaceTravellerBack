@@ -17,13 +17,7 @@ app.use(cors({
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE',"OPTIONS"], // Méthodes autorisées
   allowedHeaders: ['Content-Type'], // En-têtes autorisés
 }))
-app.use((req,res,next)=>{
-  res.setHeader('Access-Control-Allow-Origin', "*/*");
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-})
+
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("connexion mongo db ok !"))
