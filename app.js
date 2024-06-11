@@ -13,9 +13,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors({
-  origin: '*', // Remplacez par votre origine autorisée
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE',"OPTIONS"], // Méthodes autorisées
-  allowedHeaders: ['Content-Type'], // En-têtes autorisés
+  origin: '*', 
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE',"OPTIONS"], 
+  allowedHeaders: ['Content-Type'],
 }))
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*"); // ou spécifiez le domaine au lieu de *
