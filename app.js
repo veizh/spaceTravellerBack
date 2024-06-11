@@ -15,10 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("connexion mongo db ok !"))
   .catch(() => console.log("connexion mongo db failed ! "));
 app.use((req,res,next)=>{
