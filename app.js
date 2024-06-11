@@ -2,17 +2,12 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var indexRouter = require('./routes/index');
 var playerRouter = require('./routes/player.js');
 require("dotenv").config();
 
 var app = express();
 const cors = require("cors");
-const corsOptions = {
-  origin: 'http://127.0.0.1:5500',
-  
-};
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -26,7 +21,6 @@ mongoose
   .then(() => console.log("connexion mongo db ok !"))
   .catch(() => console.log("connexion mongo db failed ! "));
 
-  app.use('/', indexRouter);
 app.use('/player', playerRouter);
 
 
