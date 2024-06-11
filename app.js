@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-
+var indexRouter = require('./routes/index');
 var playerRouter = require('./routes/player.js');
 require("dotenv").config();
 
@@ -23,7 +23,7 @@ mongoose
   .then(() => console.log("connexion mongo db ok !"))
   .catch(() => console.log("connexion mongo db failed ! "));
 
-  
+  app.use('/', indexRouter);
 app.use('/player', playerRouter);
 
 
