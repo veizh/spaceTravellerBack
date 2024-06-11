@@ -17,7 +17,11 @@ app.use(cors({
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE',"OPTIONS"], // Méthodes autorisées
   allowedHeaders: ['Content-Type'], // En-têtes autorisés
 }))
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); // ou spécifiez le domaine au lieu de *
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("connexion mongo db ok !"))
