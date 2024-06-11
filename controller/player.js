@@ -1,5 +1,7 @@
 const playerSchema = require("../models/player.js")
-
+exports.test=async(req,res)=>{
+   return res.status(200).json({ msg:"ca amrche"});
+}
 exports.pushOne=async (req,res)=>{
     let newPlayer = new playerSchema({...req.body})
     try {
