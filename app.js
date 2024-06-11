@@ -2,25 +2,32 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+
 var playerRouter = require('./routes/player.js');
 require("dotenv").config();
 
 var app = express();
 const cors = require("cors");
 
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors())
-
 const mongoose = require("mongoose");
-mongoose.connect(process.env.MONGODB_URI)
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("connexion mongo db ok !"))
   .catch(() => console.log("connexion mongo db failed ! "));
 
+  
+app.use('/player', playerRouter);
 
-app.use('/player',playerRouter)
+
+
 
 
 // catch 404 and forward to error handler
