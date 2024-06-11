@@ -8,8 +8,12 @@ require("dotenv").config();
 
 var app = express();
 const cors = require("cors");
-
-app.use(cors())
+const corsOptions = {
+  origin: 'http://127.0.0.1:5500',
+  
+  credentials: true, 
+};
+app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
