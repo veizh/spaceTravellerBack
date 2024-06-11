@@ -12,11 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({
-  origin: '*', // Remplacez par votre origine autorisée
-  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE',"OPTIONS"], // Méthodes autorisées
-  allowedHeaders: ['Content-Type'], // En-têtes autorisés
-}))
+app.use(cors())
 
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI)
